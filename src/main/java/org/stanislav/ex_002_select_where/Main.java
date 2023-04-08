@@ -24,12 +24,19 @@ public class Main {
             LOG.info(author.getId() + " " + author.getName() + " " + author.getLastName());
         }
 
-        authorRepository.updateAuthorsNameWhereSizeOfLastnameBiggerThan("1",6);
+        authorRepository.updateAuthorsNameWhereSizeOfLastnameBiggerThan("1",7);
 
         authorList = authorRepository.getAuthorList();
         for (Author author : authorList) {
             LOG.info(author.getId() + " " + author.getName() + " " + author.getLastName());
         }
+
+        LOG.info("Get author by name like a ");
+        authorList = authorRepository.getAuthorsByName("a");
+        for (Author author : authorList) {
+            LOG.info(author.getId() + " " + author.getName() + " " + author.getLastName());
+        }
+
     }
 
 }

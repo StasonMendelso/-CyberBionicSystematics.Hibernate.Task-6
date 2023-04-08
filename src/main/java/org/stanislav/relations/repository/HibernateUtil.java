@@ -1,4 +1,4 @@
-package org.stanislav.ex_004_relations;
+package org.stanislav.relations.repository;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -16,7 +16,7 @@ public class HibernateUtil {
     static {
         try {
             factory = new Configuration()
-                    .configure("ex_004_config.xml")
+                    .configure("many_to_many_relation_config.xml")
                     .buildSessionFactory();
         } catch (HibernateException e) {
             LOG.error(e);

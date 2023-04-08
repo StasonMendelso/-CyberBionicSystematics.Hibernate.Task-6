@@ -53,4 +53,16 @@ public class AuthorRepository extends Repository {
         });
     }
 
+    public List<Author> getAuthorsByName(String name) {
+        return doInTransaction(session -> {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+            Root<Author> root = criteriaQuery.from(Author.class);
+
+            criteriaQuery.where(criteriaBuilder.like(root.get("name"), String.format("%%%s%%", name)));
+
+            return session.createQuery(criteriaQuery).getResultList();
+        });
+    }
+
 }

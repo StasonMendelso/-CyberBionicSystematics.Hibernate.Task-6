@@ -1,10 +1,10 @@
 package org.stanislav.ex_004_relations;
 
 
-
 import org.apache.log4j.Logger;
-import org.stanislav.ex_004_relations.entity.Author;
 import org.stanislav.ex_004_relations.entity.Book;
+import org.stanislav.ex_004_relations.repository.AuthorRepository;
+import org.stanislav.ex_004_relations.repository.BookRepository;
 
 import java.util.List;
 
@@ -13,26 +13,25 @@ import java.util.List;
  */
 public class Main {
 
-    private static final Logger LOG = Logger.getLogger( AuthorHelper.class.getName() );
+    private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-//        BookHelper helper = new BookHelper();
-//
-//        List<Book> books = helper.getBookList();
-//
-//        for (Book book : books) {
-//            LOG.debug(book.getName() + " " + book.getAuthor().getName());
-//        }
+        AuthorRepository authorRepository = new AuthorRepository();
+        BookRepository bookRepository = new BookRepository();
 
-       Author author = new AuthorHelper().getAuthorById(1);
+        for (Book book : bookRepository.getBookList()) {
+            LOG.info(book.getName() + " " + book.getAuthor().getName());
+        }
 
-       LOG.debug(author.getName());
+        System.out.println(bookRepository.deleteById(13));
+        for (Book book : bookRepository.getBookList()) {
+            LOG.info(book.getName() + " " + book.getAuthor().getName());
+        }
 
-       List<Book> authorBooks = author.getBooks();
-
-       for (Book book : authorBooks) {
-           LOG.debug(book.getName());
-       }
+        System.out.println(bookRepository.deleteBooksByAuthorName(authorRepository.getAuthorById(1)));
+        for (Book book : bookRepository.getBookList()) {
+            LOG.info(book.getName() + " " + book.getAuthor().getName());
+        }
 
     }
 
