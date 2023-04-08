@@ -6,6 +6,7 @@ package org.stanislav.ex_002_select_where;
 
 import org.apache.log4j.Logger;
 import org.stanislav.ex_002_select_where.entity.Author;
+import org.stanislav.ex_002_select_where.repository.AuthorRepository;
 
 import java.util.List;
 
@@ -14,24 +15,21 @@ import java.util.List;
  */
 public class Main {
 
-    private static final Logger LOG = Logger.getLogger( AuthorHelper.class.getName() );
+    private static final Logger LOG = Logger.getLogger( AuthorRepository.class.getName() );
 
     public static void main(String[] args) {
-        AuthorHelper ah = new AuthorHelper();
-        Author[] authors = {new Author("Pushkin"), new Author("Lermontov"), new Author("Shevchenko")};
-
-        for (Author author : authors) {
-            ah.addAuthor(author);
-        }
-
-        List<Author> authorList = ah.getAuthorList();
-
+        AuthorRepository authorRepository = new AuthorRepository();
+        List<Author> authorList = authorRepository.getAuthorList();
         for (Author author : authorList) {
-            LOG.debug(author.getId() + " " + author.getName() + " " + author.getLastName());
+            LOG.info(author.getId() + " " + author.getName() + " " + author.getLastName());
         }
 
-        Author author = ah.getAuthorById(5);
-        LOG.debug(author.getName());
+        authorRepository.updateAuthorsNameWhereSizeOfLastnameBiggerThan("1",6);
+
+        authorList = authorRepository.getAuthorList();
+        for (Author author : authorList) {
+            LOG.info(author.getId() + " " + author.getName() + " " + author.getLastName());
+        }
     }
 
 }
