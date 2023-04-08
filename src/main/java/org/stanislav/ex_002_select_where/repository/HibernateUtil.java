@@ -1,4 +1,4 @@
-package org.stanislav.ex_002_select_where;
+package org.stanislav.ex_002_select_where.repository;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;

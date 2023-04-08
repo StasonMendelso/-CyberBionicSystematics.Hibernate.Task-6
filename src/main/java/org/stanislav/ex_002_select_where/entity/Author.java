@@ -3,12 +3,15 @@ package org.stanislav.ex_002_select_where.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "author")
 public class Author {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "name")
     private String name;
 
     @Column(name = "last_name")
